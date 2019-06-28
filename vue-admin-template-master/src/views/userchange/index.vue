@@ -1,5 +1,16 @@
 <template>
   <div>
+    <el-row>
+      <el-col :span="1">
+        <div class="grid-content bg-purple" />
+      </el-col>
+      <el-col :span="3">
+        <div class="grid-content bg-purple-light">个人资料</div>
+      </el-col>
+      <el-col :span="20">
+        <div class="grid-content bg-purple" />
+      </el-col>
+    </el-row>
     <el-upload
       class="avatar-uploader"
       action="https://jsonplaceholder.typicode.com/posts/"
@@ -8,7 +19,7 @@
       :before-upload="beforeAvatarUpload"
     >
       <img v-if="imageUrl" :src="imageUrl" class="avatar">
-      <i v-else class="el-icon-plus avatar-uploader-icon"/>
+      <i v-else class="el-icon-plus avatar-uploader-icon" />
     </el-upload>
     <el-form
       ref="ruleForm"
@@ -18,16 +29,16 @@
       class="demo-ruleForm"
     >
       <el-form-item label="姓名" prop="name">
-        <el-input v-model="ruleForm.name"/>
+        <el-input v-model="ruleForm.name" />
       </el-form-item>
       <el-form-item label="电话" prop="phone">
-        <el-input v-model="ruleForm.phone"/>
+        <el-input v-model="ruleForm.phone" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="ruleForm.email"/>
+        <el-input v-model="ruleForm.email" />
       </el-form-item>
       <el-form-item label="简介" prop="desc">
-        <el-input v-model="ruleForm.desc" type="textarea"/>
+        <el-input v-model="ruleForm.desc" type="textarea" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -41,65 +52,78 @@
 export default {
   data() {
     return {
-      imageUrl: "",
+      imageUrl: '',
       ruleForm: {
-        name: "",
-        phone: "",
-        email: "",
-        desc: ""
+        name: '',
+        phone: '',
+        email: '',
+        desc: ''
       },
       rules: {
         name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入姓名', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        phone: [{ required: true, message: "请输入电话号码", trigger: "blur" }],
+        phone: [{ required: true, message: '请输入电话号码', trigger: 'blur' }],
         email: [
-          { required: true, message: "请输入邮箱地址", trigger: "blur" },
+          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
           {
-            type: "email",
-            message: "请输入正确的邮箱地址",
-            trigger: ["blur", "change"]
+            type: 'email',
+            message: '请输入正确的邮箱地址',
+            trigger: ['blur', 'change']
           }
         ],
-        desc: [{ required: true, message: "请输入简介", trigger: "blur" }]
+        desc: [{ required: true, message: '请输入简介', trigger: 'blur' }]
       }
-    };
+    }
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          alert('submit!')
         } else {
-          console.log("error submit!!");
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
-    cancel() {
-      this.$router.push("/user/index");
+    cancel(formName) {
+      this.$router.push('/user/index')
     },
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+        this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M;
+      return isJPG && isLt2M
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 4px;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -113,14 +137,14 @@ export default {
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
   text-align: center;
 }
 .avatar {
-  width: 178px;
-  height: 178px;
+  width: 80px;
+  height: 80px;
   display: block;
 }
 </style>

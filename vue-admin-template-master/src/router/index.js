@@ -171,7 +171,18 @@ export const constantRoutes = [
       }
     ]
   },
-
+  // {
+  //   path: '/userchange1',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Form',
+  //       component: () => import('@/views/userchange1/index'),
+  //       meta: { title: '个人信息', icon: 'form' }
+  //     }
+  //   ]
+  // },
   {
     path: '/userchange',
     component: Layout,
