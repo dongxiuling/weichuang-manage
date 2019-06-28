@@ -8,30 +8,30 @@
       :before-upload="beforeAvatarUpload"
     >
       <img v-if="imageUrl" :src="imageUrl" class="avatar">
-      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      <i v-else class="el-icon-plus avatar-uploader-icon"/>
     </el-upload>
     <el-form
+      ref="ruleForm"
       :model="ruleForm"
       :rules="rules"
-      ref="ruleForm"
       label-width="100px"
       class="demo-ruleForm"
     >
       <el-form-item label="姓名" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+        <el-input v-model="ruleForm.name"/>
       </el-form-item>
       <el-form-item label="电话" prop="phone">
-        <el-input v-model="ruleForm.phone"></el-input>
+        <el-input v-model="ruleForm.phone"/>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="ruleForm.email"></el-input>
+        <el-input v-model="ruleForm.email"/>
       </el-form-item>
       <el-form-item label="简介" prop="desc">
-        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+        <el-input v-model="ruleForm.desc" type="textarea"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button @click="cancel()">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -41,7 +41,7 @@
 export default {
   data() {
     return {
-      imageUrl: '',
+      imageUrl: "",
       ruleForm: {
         name: "",
         phone: "",
@@ -77,8 +77,8 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    cancel() {
+      this.$router.push("/user/index");
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);

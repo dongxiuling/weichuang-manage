@@ -171,15 +171,15 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
-    path: '/user1',
+    path: '/userchange',
     component: Layout,
     children: [
       {
         path: 'index',
         name: 'Form',
-        component: () => import('@/views/user1/index'),
-        meta: { title: '个人信息', icon: 'form' }
+        component: () => import('@/views/userchange/index')
       }
     ]
   },
