@@ -158,31 +158,27 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
-    path: '/user',
+    path: '/person',
     component: Layout,
+    redirect: '/person/user',
+    name: 'Person',
+    meta: { title: '个人中心', icon: 'example' },
     children: [
       {
-        path: 'index',
-        name: 'Form',
+        path: '/user',
+        name: 'User',
         component: () => import('@/views/user/index'),
-        meta: { title: '个人信息', icon: 'form' }
+        meta: { title: '我的信息', icon: 'table' }
+      },
+      {
+        path: '/blog',
+        name: 'Blog',
+        component: () => import('@/views/blog/index'),
+        meta: { title: '我的文章', icon: 'tree' }
       }
     ]
   },
-  // {
-  //   path: '/userchange1',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Form',
-  //       component: () => import('@/views/userchange1/index'),
-  //       meta: { title: '个人信息', icon: 'form' }
-  //     }
-  //   ]
-  // },
   {
     path: '/userchange',
     component: Layout,
@@ -194,7 +190,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

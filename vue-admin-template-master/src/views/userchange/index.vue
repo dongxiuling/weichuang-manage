@@ -89,7 +89,7 @@ export default {
       })
     },
     cancel(formName) {
-      this.$router.push('/user/index')
+      this.$router.push('/user')
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
