@@ -159,6 +159,31 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/user',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/user/index'),
+        meta: { title: '个人信息', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/user1',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/user1/index'),
+        meta: { title: '个人信息', icon: 'form' }
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
