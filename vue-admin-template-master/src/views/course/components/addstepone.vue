@@ -5,7 +5,7 @@
         <span class="little-star">*</span>课程名称：
       </el-col>
       <el-col :span="19">
-        <el-input v-model="input" placeholder="请输入课程名称"></el-input>
+        <el-input v-model="input" placeholder="请输入课程名称"/>
       </el-col>
     </el-row>
     <el-row type="flex" align="top">
@@ -14,26 +14,26 @@
       </el-col>
       <el-col :span="19">
         <el-upload action="#" list-type="picture-card" :auto-upload="false">
-          <i slot="default" class="el-icon-plus"></i>
+          <i slot="default" class="el-icon-plus"/>
           <div slot="file" slot-scope="{file}">
             <img class="el-upload-list__item-thumbnail" :src="file.url" alt>
             <span class="el-upload-list__item-actions">
               <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
-                <i class="el-icon-zoom-in"></i>
+                <i class="el-icon-zoom-in"/>
               </span>
               <span
                 v-if="!disabled"
                 class="el-upload-list__item-delete"
                 @click="handleDownload(file)"
               >
-                <i class="el-icon-download"></i>
+                <i class="el-icon-download"/>
               </span>
               <span
                 v-if="!disabled"
                 class="el-upload-list__item-delete"
                 @click="handleRemove(file)"
               >
-                <i class="el-icon-delete"></i>
+                <i class="el-icon-delete"/>
               </span>
             </span>
           </div>
@@ -48,7 +48,7 @@
         <span class="little-star">*</span>课程简介：
       </el-col>
       <el-col :span="19">
-        <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="textarea"></el-input>
+        <el-input type="textarea" :rows="2" v-model="textarea" placeholder="请输入内容"/>
       </el-col>
     </el-row>
     <el-row type="flex" align="middle">
@@ -62,7 +62,7 @@
             :key="item.value"
             :label="item.label"
             :value="item.value"
-          ></el-option>
+          />
         </el-select>
       </el-col>
       <el-col :span="3">
@@ -75,14 +75,14 @@
             :key="item.value"
             :label="item.label"
             :value="item.value"
-          ></el-option>
+          />
         </el-select>
       </el-col>
     </el-row>
 
     <el-radio v-model="radio" label="1">免费</el-radio>
     <el-radio v-model="radio" label="2">收费</el-radio>
-    <el-input v-if="radio==2" placeholder="请输入价格" v-model="input" clearable></el-input>
+    <el-input v-if="radio==2" v-model="input" placeholder="请输入价格" clearable/>
   </div>
 </template>
 
@@ -91,61 +91,61 @@ export default {
   // name: "stepOne",
   data() {
     return {
-      input: "",
-      dialogImageUrl: "",
+      input: '',
+      dialogImageUrl: '',
       dialogVisible: false,
       disabled: false,
-      textarea: "",
+      textarea: '',
       options: [
         {
-          value: "选项1",
-          label: "初级"
+          value: '选项1',
+          label: '初级'
         },
         {
-          value: "选项2",
-          label: "中级"
+          value: '选项2',
+          label: '中级'
         },
         {
-          value: "选项3",
-          label: "高级"
+          value: '选项3',
+          label: '高级'
         }
       ],
       teachers: [
         {
-          value: "老师1",
-          label: "小吴"
+          value: '老师1',
+          label: '小吴'
         },
         {
-          value: "老师2",
-          label: "小董"
+          value: '老师2',
+          label: '小董'
         },
         {
-          value: "老师3",
-          label: "小谢"
+          value: '老师3',
+          label: '小谢'
         },
         {
-          value: "老师4",
-          label: "小冯"
+          value: '老师4',
+          label: '小冯'
         }
       ],
-      valuehard: "初级",
-      valueteacher: "",
-      radio: "1"
-    };
+      valuehard: '初级',
+      valueteacher: '',
+      radio: '1'
+    }
   },
   methods: {
     handleRemove(file) {
-      console.log(file);
+      console.log(file)
     },
     handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
     },
     handleDownload(file) {
-      console.log(file);
+      console.log(file)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
