@@ -88,7 +88,7 @@
 
 <script>
 export default {
-  name: "stepOne",
+  // name: "stepOne",
   data() {
     return {
       input: "",

@@ -5,13 +5,16 @@
       <el-step title="课程详情"></el-step>
       <el-step title="教学内容"></el-step>
     </el-steps>
-    <step-one></step-one>
+    <!-- <step-one></step-one> -->
+    <step-two></step-two>
+    <!-- <component :is=""></component> -->
     <el-button style="margin-top: 12px;" @click="prev" :disabled="flagpre">上一步</el-button>
     <el-button style="margin-top: 12px;" @click="next" :disabled="flagnext">下一步</el-button>
   </div>
 </template>
 <script>
 import stepOne from '../components/addstepone.vue';
+import stepTwo from '../components/addsteptwo.vue';
 export default {
   data() {
     return {
