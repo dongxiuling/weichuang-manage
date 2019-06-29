@@ -1,5 +1,6 @@
 <template>
-    <div>111</div>
+   <mavon-editor v-model="value"/>
+
 </template>
 <script>
 export default {
