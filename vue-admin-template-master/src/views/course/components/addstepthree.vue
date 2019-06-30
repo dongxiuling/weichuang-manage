@@ -1,13 +1,19 @@
 <template>
-  <div>
+  <div class="addstepthree">
     <el-row><h3>课程目录:</h3></el-row>
     <el-row>
       <el-collapse accordion>
         <el-collapse-item :title="title" name="1">
           <el-row>
-            <el-input v-model="title" placeholder="请输入阶段名" />
-            <el-button type="primary" icon="el-icon-edit">修改</el-button>
-            <el-button type="primary" icon="el-icon-delete">删除</el-button>
+            <el-col :span="8">
+              <el-input v-model="title" placeholder="请输入阶段名" />
+            </el-col>
+            <el-col :span="2" :offset="10">
+              <el-button type="primary" icon="el-icon-edit">修改</el-button>
+            </el-col>
+            <el-col :span="2">
+              <el-button type="danger" icon="el-icon-delete">删除</el-button>
+            </el-col>
           </el-row>
 
           <el-row type="flex" align="middle">
@@ -78,7 +84,13 @@ export default {
   }
 }
 </script>
-<style lang="sass" scoped>
 
+<style lang="scss" scoped>
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 </style>
 
