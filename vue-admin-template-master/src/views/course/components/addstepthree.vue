@@ -2,9 +2,9 @@
   <div class="addstepthree">
     <h3>课程目录:</h3>
     <el-row>
-      <el-collapse v-if="flag" accordion value="1">
-        <template>
-          <step-three-content />
+      <el-collapse v-if="flag" accordion :value="num">
+        <template v-for="n in num">
+          <step-three-content :key="n" :stage-index="n" />
         </template>
       </el-collapse>
     </el-row>
@@ -23,9 +23,20 @@ export default {
       flag: false
     }
   },
+  computed: {
+    num() {
+      return this.$store.getters.nowStageNum
+    }
+  },
+  created() {
+    if (this.num !== 0) {
+      this.flag = true
+    }
+  },
   methods: {
     show() {
       this.flag = true
+      this.$store.commit('course/ADD_STAGE')
     }
   }
 }

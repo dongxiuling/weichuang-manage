@@ -8,8 +8,10 @@
     <transition name="el-fade-in-linear">
       <component :is="nowpage" />
     </transition>
-    <el-button style="margin-top: 12px;" :disabled="flagpre" @click="prev">上一步</el-button>
-    <el-button style="margin-top: 12px;" :disabled="flagnext" @click="next">{{Done}}</el-button>
+    <el-row type="flex" justify="center">
+      <el-button style="margin-top: 12px;" :disabled="flagpre" @click="prev">上一步</el-button>
+      <el-button style="margin-top: 12px;" :disabled="flagnext" @click="next">{{ Done }}</el-button>
+    </el-row>
   </div>
 </template>
 <script>

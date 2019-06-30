@@ -1,18 +1,20 @@
 <template>
   <div>
-    <el-collapse-item :title="title" name="1">
-      <el-row>
+    <el-collapse-item :name="stageIndex" class="aaaa">
+      <template slot="title">
+        <el-col :span="5">
+          <span class="inner-title">第{{ stageIndex }}阶段:&nbsp;&nbsp;{{ title }}</span>
+        </el-col>
+        <el-col :span="3" :offset="19">
+          <el-button type="danger" icon="el-icon-delete">删除</el-button>
+        </el-col>
+      </template>
+      <el-row type="flex" justify="start">
         <el-col :span="3">
           <span class="little-star">*</span>阶段名称：
         </el-col>
-        <el-col :span="8">
+        <el-col :span="9">
           <el-input v-model="title" placeholder="请输入阶段名" />
-        </el-col>
-        <el-col :span="2.5" :offset="7">
-          <el-button type="primary" icon="el-icon-edit">修改</el-button>
-        </el-col>
-        <el-col :span="2">
-          <el-button type="danger" icon="el-icon-delete">删除</el-button>
         </el-col>
       </el-row>
 
@@ -58,6 +60,7 @@
 </template>
 <script>
 export default {
+  props: { stageIndex: { type: Number, default: 1 }},
   data() {
     return {
       title: '',
@@ -87,6 +90,14 @@ export default {
   &:last-child {
     margin-bottom: 0;
   }
+}
+.inner-title{
+  text-indent: 5px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.el-collapse-item.aaaa{
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
 </style>
 
