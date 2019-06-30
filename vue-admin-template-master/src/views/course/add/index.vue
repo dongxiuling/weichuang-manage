@@ -5,10 +5,11 @@
       <el-step title="课程详情" />
       <el-step title="教学内容" />
     </el-steps>
-
-    <component :is="nowpage" />
+    <transition name="el-fade-in-linear">
+      <component :is="nowpage" />
+    </transition>
     <el-button style="margin-top: 12px;" :disabled="flagpre" @click="prev">上一步</el-button>
-    <el-button style="margin-top: 12px;" :disabled="flagnext" @click="next">下一步</el-button>
+    <el-button style="margin-top: 12px;" :disabled="flagnext" @click="next">{{Done}}</el-button>
   </div>
 </template>
 <script>
@@ -26,7 +27,8 @@ export default {
       active: 0,
       flagpre: true,
       flagnext: false,
-      nowpage: 'stepOne'
+      nowpage: 'stepOne',
+      Done: '下一步'
     }
   },
 
@@ -45,11 +47,13 @@ export default {
           break
         case 2:
           this.nowpage = 'stepThree'
+          this.Done = '提交'
           break
       }
     },
     prev() {
       this.flagnext = false
+      this.Done = '下一步'
       if (this.active-- === 1) {
         this.flagpre = true
       }
