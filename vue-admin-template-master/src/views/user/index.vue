@@ -1,69 +1,62 @@
-import 'element-ui/lib/theme-chalk/display.css';
-
 <template>
   <div>
     <el-row>
       <el-col :span="1">
         <div class="grid-content bg-purple" />
       </el-col>
-      <el-col :span="3">
+      <el-col :span="23">
         <div class="grid-content bg-purple-light">个人资料</div>
       </el-col>
-      <el-col :span="20">
-        <div class="grid-content bg-purple">
-          <el-button type="primary" plain @click="gochange()">修改</el-button>
-        </div>
-      </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="2">
-        <div class="grid-content bg-purple" />
-      </el-col>
-      <el-col :span="2">
-        <div class="grid-content bg-purple-light">姓名</div>
-      </el-col>
-      <el-col :span="20">
-        <div class="grid-content bg-purple">馒头</div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="2">
-        <div class="grid-content bg-purple" />
-      </el-col>
-      <el-col :span="2">
-        <div class="grid-content bg-purple-light">电话</div>
-      </el-col>
-      <el-col :span="20">
-        <div class="grid-content bg-purple">18566665144</div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="2">
-        <div class="grid-content bg-purple" />
-      </el-col>
-      <el-col :span="2">
-        <div class="grid-content bg-purple-light">邮箱</div>
-      </el-col>
-      <el-col :span="20">
-        <div class="grid-content bg-purple">591711447@qq.com</div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="2">
-        <div class="grid-content bg-purple" />
-      </el-col>
-      <el-col :span="2">
-        <div class="grid-content bg-purple-light">简介</div>
-      </el-col>
-      <el-col :span="20">
-        <div class="grid-content bg-purple">馒头是一只猫</div>
-      </el-col>
-    </el-row>
+    <div class="demo-type">
+      <!-- <div>
+        <el-avatar icon="el-icon-user-solid" />
+      </div> -->
+    </div>
+    <el-form
+      ref="ruleForm"
+      :model="ruleForm"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
+      <el-form-item>
+        <el-button type="primary" plain @click="gochange()">
+          <i class="el-icon-edit">修改</i>
+        </el-button>
+      </el-form-item>
+      <el-form-item label="姓名" prop="name">
+        <!-- <el-input v-model="ruleForm.name" /> -->
+        {{ ruleForm.name }}
+      </el-form-item>
+      <el-form-item label="电话" prop="phone">
+        <!-- <el-input v-model="ruleForm.phone" /> -->
+        {{ ruleForm.phone }}
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <!-- <el-input v-model="ruleForm.email" /> -->
+        {{ ruleForm.email }}
+      </el-form-item>
+      <el-form-item label="简介" prop="desc">
+        <!-- <el-input v-model="ruleForm.desc" type="textarea" /> -->
+        {{ ruleForm.phone }}
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      imageUrl: '',
+      ruleForm: {
+        name: '',
+        phone: '',
+        email: '',
+        desc: ''
+      }
+    }
+  },
   methods: {
     gochange() {
       this.$router.push('/userchange/index')
