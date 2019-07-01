@@ -78,14 +78,15 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/grading',
     component: Layout,
+    redirect: '/grading/index',
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'grading/index',
+        name: 'Grading',
+        component: () => import('@/views/grading/index'),
+        meta: { title: 'Grading(分阶段)', icon: 'grading' }
       }
     ]
   },
