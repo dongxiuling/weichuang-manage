@@ -6,9 +6,10 @@
           <span class="inner-title">第{{ stageIndex }}阶段:&nbsp;&nbsp;{{ title }}</span>
         </el-col>
         <el-col :span="3" :offset="19">
-          <el-button type="danger" icon="el-icon-delete">删除</el-button>
+          <el-button type="danger" icon="el-icon-delete" @click="Delete()">删除</el-button>
         </el-col>
       </template>
+      <div class="main-container-of-stepthree" />
       <el-row type="flex" justify="start">
         <el-col :span="3">
           <span class="little-star">*</span>阶段名称：
@@ -71,6 +72,11 @@ export default {
       sections: [
       ]
     }
+  },
+  methods: {
+    Delete() {
+      this.$store.commit('course/DELET_STAGE')
+    }
   }
 }
 </script>
@@ -87,6 +93,7 @@ export default {
 }
 .el-row {
   margin-bottom: 20px;
+  margin-left:10px;
   &:last-child {
     margin-bottom: 0;
   }

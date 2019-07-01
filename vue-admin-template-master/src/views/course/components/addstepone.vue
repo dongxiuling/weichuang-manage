@@ -97,7 +97,6 @@
 
 <script>
 export default {
-  // name: "stepOne",
   data() {
     return {
       input: '',
@@ -140,6 +139,11 @@ export default {
       valuehard: '初级',
       valueteacher: '',
       radio: '1'
+    }
+  },
+  computed: {
+    className() {
+      return this.$store.getter.classInformation.className
     }
   },
   methods: {
