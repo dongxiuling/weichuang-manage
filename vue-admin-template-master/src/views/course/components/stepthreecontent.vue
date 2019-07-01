@@ -3,7 +3,7 @@
     <el-collapse-item :name="stageIndex" class="aaaa">
       <template slot="title">
         <el-col :span="5">
-          <span class="inner-title">第{{ stageIndex }}阶段:&nbsp;&nbsp;{{ title }}</span>
+          <span class="inner-title">第{{ stageIndex }}小节:&nbsp;&nbsp;{{ title }}</span>
         </el-col>
         <el-col :span="3" :offset="19">
           <el-button type="danger" icon="el-icon-delete" @click="Delete()">删除</el-button>
@@ -12,10 +12,10 @@
       <div class="main-container-of-stepthree" />
       <el-row type="flex" justify="start">
         <el-col :span="3">
-          <span class="little-star">*</span>阶段名称：
+          <span class="little-star">*</span>小节名称：
         </el-col>
         <el-col :span="9">
-          <el-input v-model="title" placeholder="请输入阶段名" />
+          <el-input v-model="title" placeholder="请输入小节名" />
         </el-col>
       </el-row>
 
@@ -24,7 +24,7 @@
           <span class="little-star">*</span>视频地址：
         </el-col>
         <el-col :span="19">
-          <el-input v-model="input" placeholder="请输入视频地址" />
+          <el-input v-model="urlAddress" placeholder="请输入视频地址" />
         </el-col>
       </el-row>
 
@@ -33,7 +33,7 @@
           <span class="little-star">*</span>任务名称：
         </el-col>
         <el-col :span="19">
-          <el-input v-model="input" placeholder="请输入任务名称" />
+          <el-input v-model="taskName" placeholder="请输入任务名称" />
         </el-col>
       </el-row>
 

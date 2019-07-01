@@ -4,7 +4,7 @@ const state = {
     className: '',
     classImg: '',
     classBrif: '',
-    classHard: '',
+    classHard: '初级',
     classPayment: '1',
     classFee: '',
     classTeacher: '', // 第一页面数据
@@ -31,28 +31,28 @@ const mutations = {
     state.nowStageNum--
   },
   MAP_CLASSNAME: (state, val) => {
-    state.className = val
+    state.classInformation.className = val
   },
   MAP_CLASSIMG: (state, val) => {
-    state.classImg = val
+    state.classInformation.classImg = val
   },
   MAP_CLASSBRIF: (state, val) => {
-    state.classBrif = val
+    state.classInformation.classBrif = val
   },
   MAP_CLASSHARD: (state, val) => {
-    state.classHard = val
+    state.classInformation.classHard = val
   },
   MAP_CLASSPAYMENT: (state, val) => {
-    state.classPayment = val
+    state.classInformation.classPayment = val
   },
   MAP_CLASSFEE: (state, val) => {
-    state.classFee = val
+    state.classInformation.classFee = val
   },
   MAP_CLASSTEACHER: (state, val) => {
-    state.classTeacher = val
+    state.classInformation.classTeacher = val
   },
   MAP_CLASSDETAIL: (state, val) => {
-    state.classDetail = val
+    state.classInformation.classDetail = val
   }
 }
 export default {

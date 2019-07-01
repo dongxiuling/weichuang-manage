@@ -1,5 +1,5 @@
 <template>
-  <mavon-editor v-model="value" class="mavon-edi" />
+  <mavon-editor v-model="value" class="mavon-edi" @input="saveDetail(value)" />
 </template>
 <script>
 export default {
@@ -7,6 +7,19 @@ export default {
   data() {
     return {
       value: ''
+    }
+  },
+  computed: {
+    classInformation() {
+      return this.$store.getters.classInformation
+    }
+  },
+  created() {
+    this.value = this.classInformation.classDetail
+  },
+  methods: {
+    saveDetail(val) {
+      this.$store.commit('course/MAP_CLASSDETAIL', val)
     }
   }
 }
