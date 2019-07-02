@@ -8,19 +8,31 @@
         </template>
       </el-collapse>
     </el-row>
-    <el-row><el-button type="text" @click="show()">+&nbsp;新增一节</el-button></el-row>
+    <el-row><el-button type="text" @click="show(classStage)">+&nbsp;新增一节</el-button></el-row>
   </div>
 
 </template>
 <script>
 import stepThreeContent from './stepthreecontent'
 export default {
+  name: 'StepThree',
   components: {
     stepThreeContent
   },
   data() {
     return {
-      flag: false
+      flag: false,
+      classStage: {
+        classStateName: '',
+        classVideoUrl: '',
+        classTaskName: '',
+        brain: {
+          brainImg: '',
+          brainPosition: [
+            {}
+          ]
+        }
+      }
     }
   },
   computed: {
@@ -34,9 +46,9 @@ export default {
     }
   },
   methods: {
-    show() {
+    show(val) {
       this.flag = true
-      this.$store.commit('course/ADD_STAGE')
+      this.$store.commit('course/ADD_STAGE', val)
     }
   }
 }

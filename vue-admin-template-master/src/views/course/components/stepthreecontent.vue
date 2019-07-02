@@ -1,12 +1,13 @@
 <template>
   <div>
-    <el-collapse-item :name="stageIndex" class="aaaa">
+    <!-- <keep-alive> -->
+    <el-collapse-item :name="stageIndex" class="add-shadow">
       <template slot="title">
-        <el-col :span="5">
-          <span class="inner-title">第{{ stageIndex }}小节:&nbsp;&nbsp;{{ title }}</span>
+        <el-col :span="10">
+          <span class="inner-title">第{{ stageIndex }}小节:&nbsp;&nbsp;{{ classStage.classStateName }}</span>
         </el-col>
-        <el-col :span="3" :offset="19">
-          <el-button type="danger" icon="el-icon-delete" @click="Delete()">删除</el-button>
+        <el-col :span="3" :offset="10">
+          <el-button type="danger" icon="el-icon-delete" @click="Delete(stageIndex)">删除</el-button>
         </el-col>
       </template>
       <div class="main-container-of-stepthree" />
@@ -15,7 +16,7 @@
           <span class="little-star">*</span>小节名称：
         </el-col>
         <el-col :span="9">
-          <el-input v-model="title" placeholder="请输入小节名" />
+          <el-input v-model="classStage.classStateName" placeholder="请输入小节名" />
         </el-col>
       </el-row>
 
@@ -24,7 +25,7 @@
           <span class="little-star">*</span>视频地址：
         </el-col>
         <el-col :span="19">
-          <el-input v-model="urlAddress" placeholder="请输入视频地址" />
+          <el-input v-model="classStage.classVideoUrl" placeholder="请输入视频地址" />
         </el-col>
       </el-row>
 
@@ -33,7 +34,7 @@
           <span class="little-star">*</span>任务名称：
         </el-col>
         <el-col :span="19">
-          <el-input v-model="taskName" placeholder="请输入任务名称" />
+          <el-input v-model="classStage.classTaskName" placeholder="请输入任务名称" />
         </el-col>
       </el-row>
 
@@ -54,8 +55,39 @@
           </el-upload>
         </el-col>
       </el-row>
-      <el-row style="margin-left:12.5%;"><el-button plain>添加脑图坐标</el-button></el-row>
+      <el-row style="margin-left:12.5%;"><el-button type="text" @click="dialogFormVisible = true">添加脑图坐标</el-button>
+      </el-row>
+      <!--下面是弹出的脑图-->
+      <el-dialog title="脑图坐标" :visible.sync="dialogFormVisible">
+        <el-form :model="classStage.brain">
+          <el-form-item label="坐标" :label-width="formLabelWidth">
+            <el-input v-model="brainCoor" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="概念" :label-width="formLabelWidth">
+            <el-input v-model="brainConcept" type="textarea" placeholder="请输入脑图概念" />
+          </el-form-item>
+          <el-form-item label="示例" :label-width="formLabelWidth">
+            <el-input v-model="brainExample" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="网络资源" :label-width="formLabelWidth">
+            <el-input v-model="webResource" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="链接地址" :label-width="formLabelWidth">
+            <el-input v-model="webUrlAdd" autocomplete="off" />
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="saveBrain(brainObj)">保 存</el-button>
+        </div>
+      </el-dialog>
+
+      <el-row style="margin-left:12.5%;"><el-button type="primary" @click="saveStageMessage(stageIndex,classStage)">保存</el-button></el-row>
+
     </el-collapse-item>
+
+    <!-- </keep-alive> -->
+
   </div>
 
 </template>
@@ -64,18 +96,55 @@ export default {
   props: { stageIndex: { type: Number, default: 1 }},
   data() {
     return {
-      title: '',
-      urlAddress: '',
-      taskName: '',
-      brainXy: { x: '', y: '' },
-      brainCoordinate: [],
-      sections: [
-      ]
+      brainCoor: '',
+      brainConcept: '',
+      brainExample: '',
+      webResource: '',
+      webUrlAdd: '',
+      brainObj: {},
+      classStage: {
+        classStateName: '',
+        classVideoUrl: '',
+        classTaskName: '',
+        brain: {
+          brainImg: '',
+          brainPosition: [
+          ]
+        }
+      },
+      dialogFormVisible: false,
+      formLabelWidth: '120px'
     }
   },
+  computed: {
+    classInformation() {
+      return this.$store.getters.classInformation
+    }
+  },
+  created() {
+    this.classStage = { ...this.classInformation.classStage[this.stageIndex - 1] }
+  },
   methods: {
-    Delete() {
-      this.$store.commit('course/DELET_STAGE')
+    Delete(index) {
+      this.$store.commit('course/DELET_STAGE', index)
+    },
+    saveBrain(obj) {
+      this.dialogFormVisible = false
+      obj.brainCoor = this.brainCoor
+      obj.brainConcept = this.brainConcept
+      obj.brainExample = this.brainExample
+      obj.webResource = this.webResource
+      obj.webUrlAdd = this.webUrlAdd
+      var trueObj = { ...obj }
+      this.classStage.brain.brainPosition.push(trueObj)
+      this.brainCoor = ''
+      this.brainConcept = ''
+      this.brainExample = ''
+      this.webResource = ''
+      this.webUrlAdd = ''
+    },
+    saveStageMessage(index, val) {
+      this.$store.commit('course/REPLACE_CLASSSTAGE', { index, val })
     }
   }
 }
@@ -103,7 +172,7 @@ export default {
   font-size: 16px;
   font-weight: bolder;
 }
-.el-collapse-item.aaaa{
+.el-collapse-item.add-shadow{
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
 </style>
