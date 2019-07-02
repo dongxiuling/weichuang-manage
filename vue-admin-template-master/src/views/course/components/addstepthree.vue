@@ -29,7 +29,6 @@ export default {
         brain: {
           brainImg: '',
           brainPosition: [
-            {}
           ]
         }
       }

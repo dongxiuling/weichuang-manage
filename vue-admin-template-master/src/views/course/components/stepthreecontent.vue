@@ -55,6 +55,9 @@
           </el-upload>
         </el-col>
       </el-row>
+      <template v-for="(item,index) in classStage.brain.brainPosition">
+        <el-row :key="index" style="margin-left:12.5%;">{{ item.brainCoor }}</el-row>
+      </template>
       <el-row style="margin-left:12.5%;"><el-button type="text" @click="dialogFormVisible = true">添加脑图坐标</el-button>
       </el-row>
       <!--下面是弹出的脑图-->
@@ -70,10 +73,10 @@
             <el-input v-model="brainExample" autocomplete="off" />
           </el-form-item>
           <el-form-item label="网络资源" :label-width="formLabelWidth">
-            <el-input v-model="webResource" autocomplete="off" />
+            <el-input v-model="webResource.name" autocomplete="off" />
           </el-form-item>
           <el-form-item label="链接地址" :label-width="formLabelWidth">
-            <el-input v-model="webUrlAdd" autocomplete="off" />
+            <el-input v-model="webResource.address" autocomplete="off" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -99,8 +102,10 @@ export default {
       brainCoor: '',
       brainConcept: '',
       brainExample: '',
-      webResource: '',
-      webUrlAdd: '',
+      webResource: {
+        name: '',
+        address: ''
+      },
       brainObj: {},
       classStage: {
         classStateName: '',
@@ -122,10 +127,14 @@ export default {
     }
   },
   created() {
-    this.classStage = { ...this.classInformation.classStage[this.stageIndex - 1] }
+    this.classStage = JSON.parse(JSON.stringify(this.classInformation.classStage[this.stageIndex - 1]))
+  },
+  mounted() {
+    this.classStage = JSON.parse(JSON.stringify(this.classInformation.classStage[this.stageIndex - 1]))
   },
   methods: {
     Delete(index) {
+      this.$forceUpdate()
       this.$store.commit('course/DELET_STAGE', index)
     },
     saveBrain(obj) {
@@ -134,14 +143,16 @@ export default {
       obj.brainConcept = this.brainConcept
       obj.brainExample = this.brainExample
       obj.webResource = this.webResource
-      obj.webUrlAdd = this.webUrlAdd
       var trueObj = { ...obj }
       this.classStage.brain.brainPosition.push(trueObj)
       this.brainCoor = ''
       this.brainConcept = ''
       this.brainExample = ''
-      this.webResource = ''
-      this.webUrlAdd = ''
+      this.webResource = {
+        name: '',
+        address: ''
+      }
+      obj = {}
     },
     saveStageMessage(index, val) {
       this.$store.commit('course/REPLACE_CLASSSTAGE', { index, val })

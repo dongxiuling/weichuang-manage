@@ -7,9 +7,7 @@
     </el-steps>
 
     <transition name="el-fade-in-linear">
-
       <component :is="nowpage" />
-
     </transition>
     <el-row type="flex" justify="center">
       <el-button style="margin-top: 12px;" :disabled="flagpre" @click="prev">上一步</el-button>
