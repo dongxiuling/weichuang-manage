@@ -158,35 +158,42 @@ export const constantRoutes = [
       }
     ]
   },
+  // 学生管理
   {
-    path: '/person',
-    component: Layout,
-    redirect: '/person/user',
-    name: 'Person',
-    meta: { title: '个人中心', icon: 'example' },
-    children: [
-      {
-        path: '/user',
-        name: 'User',
-        component: () => import('@/views/user/index'),
-        meta: { title: '我的信息', icon: 'table' }
-      },
-      {
-        path: '/blog',
-        name: 'Blog',
-        component: () => import('@/views/blog/index'),
-        meta: { title: '我的文章', icon: 'tree' }
-      }
-    ]
-  },
-  {
-    path: '/userchange',
+    path: '/student',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/userchange/index')
+        name: 'Student',
+        component: () => import('@/views/student/index'),
+        meta: { title: '学生管理', icon: 'form' }
+      }
+    ]
+  },
+  // 文章管理
+  {
+    path: '/blog',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Blog',
+        component: () => import('@/views/blog/index'),
+        meta: { title: '文章管理', icon: 'form' }
+      }
+    ]
+  },
+  // 文章详情
+  {
+    path: '/blogContent',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'blogContent',
+        component: () => import('@/views/blogContent/index'),
+        meta: { title: '文章详情', icon: 'form' }
       }
     ]
   },

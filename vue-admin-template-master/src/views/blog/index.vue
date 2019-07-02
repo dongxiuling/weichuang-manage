@@ -1,34 +1,21 @@
 <template>
   <div>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="管理文章" name="first">
-        <ul>
-          <li>
-            <h2>青春</h2>
-            <span>青春是一个短暂的美梦, 当你醒来时, 它早已消失无踪...</span>
-            <el-badge :value="99" class="item" type="primary">
-              <el-button size="small">评论</el-button>
-            </el-badge>
-            <el-badge :value="99" class="item" type="warning">
-              <el-button size="small">阅读</el-button>
-            </el-badge>
-            <i class="el-icon-edit" @click="blogChange()" />
-            <i class="el-icon-share" />
-            <i class="el-icon-delete" />
-          </li>
-        </ul>
-        <div class="block">
-          <el-pagination layout="prev, pager, next" :total="50" />
-        </div>
-      </el-tab-pane>
-      <el-tab-pane label="发表文章" name="second">
-        <div id="main">
-          <mavon-editor v-model="value" />
-        </div>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-        <el-button @click="cancel()">取消</el-button>
-      </el-tab-pane>
-    </el-tabs>
+    <el-table :data="tableData" stripe style="width: 100%">
+      <el-table-column prop="date" label="发表日期" sortable width="150" />
+      <el-table-column
+        prop="classify"
+        label="分类"
+        width="100"
+        :filters="[{ text: '前端', value: '前端' }, { text: '后端', value: '后端' }]"
+        :filter-method="filterHandler"
+      />
+      <el-table-column prop="title" label="标题" width="100" />
+      <el-table-column prop="content" label="内容" width="500" />
+      <el-table-column prop="author" label="作者" width="100" />
+      <el-table-column prop="reading" label="阅读" width="100" />
+      <el-table-column prop="comments" label="评论" width="100" />
+      <el-table-column prop="praise" label="点赞" width="100" />
+    </el-table>
   </div>
 </template>
 
@@ -36,27 +23,48 @@
 export default {
   data() {
     return {
-      activeName: 'first',
-      value: ''
+      tableData: [
+        {
+          date: '2019-01-01',
+          classify: '前端',
+          title: '1',
+          content: '22',
+          author: '张三',
+          reading: '99',
+          comments: '99',
+          praise: '99'
+        },
+        {
+          date: '2019-01-02',
+          classify: '后端',
+          title: '1',
+          content: '22',
+          author: '张三',
+          reading: '99',
+          comments: '99',
+          praise: '99'
+        },
+        {
+          date: '2019-01-03',
+          classify: '前端',
+          title: '1',
+          content: '22',
+          author: '张三',
+          reading: '99',
+          comments: '99',
+          praise: '99'
+        }
+      ]
     }
   },
   methods: {
-    handleClick(tab, event) {
-      console.log(tab, event)
-    },
-    blogChange() {
-      this.activeName = 'second'
-    },
-    cancel() {
-      this.activeName = 'first'
+    filterHandler(value, row, column) {
+      const property = column['property']
+      return row[property] === value
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.item {
-  margin-top: 10px;
-  margin-right: 10px;
-}
 </style>
