@@ -6,7 +6,6 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="3"><div class="grid-content title">课程管理</div></el-col>
-      <el-col :span="2"><el-button :plain="true" @click="openCenter">使用说明</el-button></el-col>
       <el-col :span="19"><div class="grid-content"></div></el-col>
     </el-row>
     <el-tabs v-model="activeName" @tab-click="handleClick">

@@ -94,33 +94,9 @@ export const constantRoutes = [
         meta: { title: '添加课程' }
       },
       {
-<<<<<<< HEAD
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         meta: { title: '查看课程' }
-=======
-        path: 'check',
-        component: () => import('@/views/course/check/index'),
-        name: 'Check',
-        meta: { title: '查看课程' }
-      },
-      {
-        path: '/stage',
-        component: () => import('@/views/course/stage/index'),
-        name: 'Stage',
-        meta: { title: '分阶段' }
->>>>>>> e20f1eb8a0777022b618d45a7d696872b550f317
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
