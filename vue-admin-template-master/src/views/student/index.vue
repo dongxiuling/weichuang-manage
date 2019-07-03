@@ -7,7 +7,13 @@
       <el-table-column prop="city" label="城市" width="100" />
       <el-table-column prop="school" label="学校" width="100" />
       <el-table-column prop="major" label="专业" width="100" />
-      <el-table-column prop="signature" label="个性签名" width="500" />
+      <el-table-column prop="signature" label="个性签名" width="300" />
+      <el-table-column prop="change" label="编辑" width="200">
+        <el-row>
+          <el-button type="primary">修改</el-button>
+          <el-button type="danger" @click="del()">删除</el-button>
+        </el-row>
+      </el-table-column>
     </el-table>
   </div>
 </template>
