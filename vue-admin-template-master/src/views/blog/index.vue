@@ -15,7 +15,6 @@
       <el-table-column prop="reading" label="阅读" width="100" />
       <el-table-column prop="comments" label="评论" width="100" />
       <el-table-column prop="praise" label="点赞" width="100" />
-      <el-table-column prop="hot" label="热门" width="100" />
     </el-table>
   </div>
 </template>
