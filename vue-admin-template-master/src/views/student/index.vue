@@ -11,20 +11,15 @@
       <el-table-column prop="change" label="编辑" width="200">
         <el-row>
           <el-button type="primary">修改</el-button>
-          <el-button type="warning">删除</el-button>
+          <el-button type="warning" @click="del(date)">删除</el-button>
         </el-row>
       </el-table-column>
     </el-table>
-    <span class="form-group">
-      <label>姓名</label>
-      <input type="text" v-model='name'>
-    </span>
-    <span class="form-group">
-      <label>学校</label>
-      <input type="text" v-model='school'>
-    </span>
     <el-row>
-      <el-button type="success" @click='add()'>添加</el-button>
+      <input v-model="date" type="text">
+      <input v-model="name" type="text">
+      <input v-model="school" type="text">
+      <el-button type="success" @click="add()">添加</el-button>
     </el-row>
   </div>
 </template>
@@ -34,7 +29,10 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      tableData: []
+      tableData: [],
+      date: '',
+      name: '',
+      school: ''
     }
   },
   created() {
@@ -48,15 +46,16 @@ export default {
     formatter(row, column) {
       return row.address
     },
-    add(){ 
-      this.tableData.push({  
-        name:this.name,
-        school:this.school
-        // isRed:false, //添加商品变色
-        // id:Symbol()
-      })   
-      this.showList = [...this.productList];
+    add() {
+      this.tableData.push({
+        date: this.date,
+        name: this.name,
+        school: this.school
+      })
     },
+    del(date) {
+      this.tableData.splice(date, 1)
+    }
   }
 }
 </script>
