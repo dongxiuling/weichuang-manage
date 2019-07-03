@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table :data="tableData" stripe style="width: 100%">
-      <el-table-column prop="date" label="发表日期" sortable width="150" />
+      <el-table-column prop="date" label="发表日期" sortable width="200" />
       <el-table-column
         prop="classify"
         label="分类"
@@ -10,7 +10,7 @@
         :filter-method="filterHandler"
       />
       <el-table-column prop="title" label="标题" width="100" />
-      <el-table-column prop="content" label="内容" width="500" />
+      <el-table-column prop="content" label="内容" width="300" />
       <el-table-column prop="author" label="作者" width="100" />
       <el-table-column prop="reading" label="阅读" width="100" />
       <el-table-column prop="comments" label="评论" width="100" />
@@ -20,42 +20,19 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      tableData: [
-        {
-          date: '2019-01-01',
-          classify: '前端',
-          title: '1',
-          content: '22',
-          author: '张三',
-          reading: '99',
-          comments: '99',
-          praise: '99'
-        },
-        {
-          date: '2019-01-02',
-          classify: '后端',
-          title: '1',
-          content: '22',
-          author: '张三',
-          reading: '99',
-          comments: '99',
-          praise: '99'
-        },
-        {
-          date: '2019-01-03',
-          classify: '前端',
-          title: '1',
-          content: '22',
-          author: '张三',
-          reading: '99',
-          comments: '99',
-          praise: '99'
-        }
-      ]
+      tableData: []
     }
+  },
+  created() {
+    axios.get('https://www.easy-mock.com/mock/5cea353446a5bf3b03eed106/example/mock2')
+      .then((result) => {
+        console.log(result.data.data.projects)
+        this.tableData = result.data.data.projects
+      })
   },
   methods: {
     filterHandler(value, row, column) {

@@ -1,25 +1,13 @@
 <template>
-  <div>
+  <div class="blog">
     <div class="BlogTitle">
       <h1>文章2</h1>
-      <div class="BlogStat">
-        <span class="admin">
-          <i class="el-icon-edit" />
-          <i class="el-icon-share" />
-          <i class="el-icon-delete" />
-        </span>
+      <div>
+        <span>2019.01.01</span>
+        <span>阅读 1000</span>
       </div>
-      <el-badge :value="9" class="item">
-        <el-button size="small">阅读</el-button>
-      </el-badge>
-      <el-badge :value="6" class="item">
-        <el-button size="small">评论</el-button>
-      </el-badge>
-      <el-badge :value="3" class="item">
-        <el-button size="small">点赞</el-button>
-      </el-badge>
+      <div class="BlogContent">为了便于阅读</div>
     </div>
-    <div class="BlogContent">文章内容</div>
     <div class="BlogLinks">
       <ul>
         <li>
@@ -35,7 +23,9 @@
       </ul>
     </div>
     <div class="BlogComments">
-      <h2>评论</h2>
+      <h3>评论</h3>
+      <el-input placeholder="评论内容"></el-input>
+      <el-button>评论</el-button>
       <ul>
         <li>
           <div class="portrait">
@@ -49,10 +39,6 @@
           </div>
         </li>
       </ul>
-    </div>
-    <div class="CommentForm">
-      <el-input placeholder="评论内容"></el-input>
-      <el-button>发表评论</el-button>
     </div>
   </div>
 </template>
@@ -68,6 +54,7 @@ export default {
   margin-top: 10px;
   margin-right: 40px;
 }
+
 .BlogTitle {
   padding: 5px 0 5px 10px;
   margin: 0 0 20px 0;
@@ -76,14 +63,14 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 .BlogContent {
-  padding: 0 10px;
+  padding: 10px;
 }
 .BlogComments {
   margin: 20px 0 0 0;
 }
 .BlogComments h2 {
   background: #f2f2f2;
-  font-size: 10pt;
+  // font-size: 10pt;
   padding: 3px 5px;
 }
 .BlogComments h2 .opts {
