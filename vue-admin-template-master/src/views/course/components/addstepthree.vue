@@ -60,8 +60,9 @@
             </el-row>
             <template v-for="(coorItem,coorIndex) in item.brain.brainPosition">
               <el-row :key="coorIndex" style="margin-left:12.5%;">
-                <el-col>{{ coorItem.brainCoor }}</el-col>
-                <el-col><el-button type="primary" @click="eventTarget = 'change';dialogFormVisible=true;changeBrain(index, coorIndex, brainObj)">修改脑图坐标</el-button></el-col>
+                <el-col :span="4">坐标{{ coorIndex+1 }}：{{ coorItem.brainCoor }}</el-col>
+                <el-col :span="5"><el-button type="primary" @click="eventTarget = 'change';dialogFormVisible=true;changeBrain(index, coorIndex, brainObj)">修改脑图坐标</el-button></el-col>
+                <el-col :span="3"><el-button type="danger" @click="deleteBrain(index, coorIndex)">删除该坐标</el-button></el-col>
               </el-row>
             </template>
             <el-row style="margin-left:12.5%;"><el-button type="text" @click="dialogFormVisible=true;eventTarget='add'">添加脑图坐标</el-button>
@@ -90,9 +91,7 @@
                 <el-button type="primary" @click="saveBrain(brainObj,index)">保 存</el-button>
               </div>
             </el-dialog>
-
             <el-row style="margin-left:12.5%;"><el-button type="primary" @click="saveStageMessage(classStageArr)">保存</el-button></el-row>
-
           </el-collapse-item>
         </template>
       </el-collapse>
@@ -155,24 +154,24 @@ export default {
     },
     saveBrain(obj, idx) {
       this.dialogFormVisible = false
+      obj.brainCoor = this.brainCoor
+      obj.brainConcept = this.brainConcept
+      obj.brainExample = this.brainExample
+      obj.webResource = this.webResource
+      var trueObj = { ...obj }
       if (this.eventTarget === 'add') {
-        obj.brainCoor = this.brainCoor
-        obj.brainConcept = this.brainConcept
-        obj.brainExample = this.brainExample
-        obj.webResource = this.webResource
-        var trueObj = { ...obj }
         this.classStageArr[idx].brain.brainPosition.push(trueObj)
-        this.brainCoor = ''
-        this.brainConcept = ''
-        this.brainExample = ''
-        this.webResource = {
-          name: '',
-          address: ''
-        }
-        obj = {}
-      } else {
-        this.changeBrain(this.tepmStageIdx, this.tempBrainPosIdx, this.brainObj)
+      } else if (this.eventTarget === 'change') {
+        this.classStageArr[this.tepmStageIdx].brain.brainPosition.splice(this.tempBrainPosIdx, 1, trueObj)
       }
+      this.brainCoor = ''
+      this.brainConcept = ''
+      this.brainExample = ''
+      this.webResource = {
+        name: '',
+        address: ''
+      }
+      obj = {}
     },
     saveStageMessage(val) {
       this.$store.commit('course/REPLACE_CLASSSTAGE', val)
@@ -186,21 +185,9 @@ export default {
       this.webResource.name = this.classStageArr[stageIdx].brain.brainPosition[idx].webResource.name
       this.webResource.address = this.classStageArr[stageIdx].brain.brainPosition[idx].webResource.address
       this.dialogFormVisible = true
-      brainObj.brainCoor = this.brainCoor
-      brainObj.brainConcept = this.brainConcept
-      brainObj.brainExample = this.brainExample
-      brainObj.webResource = this.webResource
-      var changeObj = { ...brainObj }
-      this.classStageArr[stageIdx].brain.brainPosition.splice(idx, 1, changeObj)
-      // this.brainCoor = ''
-      // this.brainConcept = ''
-      // this.brainExample = ''
-      // this.webResource = {
-      //   name: '',
-      //   address: ''
-      // }
-      // brainObj = {}
-      // this.eventTarget = 'add'
+    },
+    deleteBrain(stageIdx, idx) {
+      this.classStageArr[stageIdx].brain.brainPosition.splice(idx, 1)
     }
   }
 }
