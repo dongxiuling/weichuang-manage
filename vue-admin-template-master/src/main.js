@@ -15,6 +15,7 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
 Vue.use(mavonEditor)
@@ -33,7 +34,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
-Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 
