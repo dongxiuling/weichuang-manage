@@ -3,6 +3,8 @@ const getters = {
   device: state => state.app.device,
   token: state => state.user.token,
   avatar: state => state.user.avatar,
-  name: state => state.user.name
+  name: state => state.user.name,
+  nowStageNum: state => state.course.nowStageNum,
+  classInformation: state => state.course.classInformation
 }
 export default getters
