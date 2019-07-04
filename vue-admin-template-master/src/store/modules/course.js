@@ -1,5 +1,4 @@
 const state = {
-  nowStageNum: 0, // 第三个页面的阶段数
   classInformation: {
     className: '',
     classImg: '',
@@ -17,12 +16,7 @@ const state = {
 }
 const mutations = {
   ADD_STAGE: (state, val) => { // 操作第三个页面的阶段数加一操作
-    state.nowStageNum++
     state.classInformation.classStage.push(val)// 第三个页面vuex中推进一个空的数据
-  },
-  DELET_STAGE: (state, val) => { // 操作第三个页面的阶段数减一操作
-    state.nowStageNum--
-    state.classInformation.classStage.splice(val - 1, 1)
   },
   MAP_CLASSNAME: (state, val) => { // 第一个页面的课程名称
     state.classInformation.className = val
@@ -48,11 +42,10 @@ const mutations = {
   MAP_CLASSDETAIL: (state, val) => { // 第二个页面的课程详情
     state.classInformation.classDetail = val
   },
-  MAP_CLASSSTAGE: (state, val) => {
-    state.classInformation.classStage.push(val)
-  },
   REPLACE_CLASSSTAGE: (state, obj) => {
-    state.classInformation.classStage.splice(obj.index - 1, 1, obj.val)
+    var classStage = obj
+    Object.assign({}, state.classInformation, classStage)
+    state.classInformation
   }
 }
 export default {
