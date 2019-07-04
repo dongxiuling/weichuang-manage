@@ -144,19 +144,6 @@ export const constantRoutes = [
       }
     ]
   },
-  // 文章详情
-  {
-    path: '/blogContent',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'blogContent',
-        component: () => import('@/views/blogContent/index'),
-        meta: { title: '文章详情', icon: 'form' }
-      }
-    ]
-  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

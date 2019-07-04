@@ -33,25 +33,37 @@
           <td width="10%">{{ item.school }}</td>
           <td width="10%">{{ item.major }}</td>
           <td width="10%">{{ item.signature }}</td>
-          <td width="10%">
+          <td width="15%">
+            <el-button type="success" plain @click="dialogFormVisible = true,edit(item)">修改</el-button>
             <el-button type="danger" plain @click="deletelist(item.id,index)">删除</el-button>
-            <el-button type="success" plain @click="dialogFormVisible = true,edit(item)">编辑</el-button>
           </td>
         </tr>
       </tbody>
     </table>
     <!-- 修改 -->
     <el-dialog v-if="dialogFormVisible" title="学生信息" :visible.sync="dialogFormVisible">
-      <el-form :model="editDetail">
-        <el-input v-model="editDetail.name" type="text" placeholder="姓名" />
-        <el-input v-model="editDetail.sex" type="text" placeholder="性别" />
-        <el-input v-model="editDetail.city" type="text" placeholder="城市" />
-        <el-input v-model="editDetail.school" type="text" placeholder="学校" />
-        <el-input v-model="editDetail.major" type="text" placeholder="专业" />
-        <el-input v-model="editDetail.signature" type="text" placeholder="个性签名" />
+      <el-form :model="editDetail" ref="form" label-width="100px">
+        <el-form-item label="姓名:">
+          <el-input v-model="editDetail.name" type="text" placeholder="姓名" />
+        </el-form-item>
+        <el-form-item label="性别:">
+          <el-input v-model="editDetail.sex" type="text" placeholder="性别" />
+        </el-form-item>
+        <el-form-item label="城市:">
+          <el-input v-model="editDetail.city" type="text" placeholder="城市" />
+        </el-form-item>
+        <el-form-item label="学校:">
+          <el-input v-model="editDetail.school" type="text" placeholder="学校" />
+        </el-form-item>
+        <el-form-item label="专业:">
+          <el-input v-model="editDetail.major" type="text" placeholder="专业" />
+        </el-form-item>
+        <el-form-item label="个性签名:">
+          <el-input v-model="editDetail.signature" type="text" placeholder="个性签名" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="update">更新</el-button>
+        <el-button @click="update">确定</el-button>
         <el-button @click="dialogFormVisible = false">取消</el-button>
       </div>
     </el-dialog>
