@@ -1,8 +1,8 @@
-import request from '../utils/request'
+import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '../views/grading/index',
+    url: '',
     method: 'get',
     params: query
   })

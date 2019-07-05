@@ -1,23 +1,17 @@
 <template>
   <div class="app-container">
-    <!-- <el-form ref="form" :model="fetchData" label-width="120px"> -->
-    <el-form ref="form" label-width="120px">
+    <el-form ref="form" :model="fetchList" label-width="120px">
+    <!-- <el-form ref="form" label-width="120px"> -->
       <el-form-item label="阶段名称">
-        <el-input v-model="stepsName" />
+        <el-input v-model="steps.name" />
       </el-form-item>
       <el-form-item label="本阶段课程">
-        <!-- <div class="steps-container">
-          <el-select v-model="steps" placeholder="请选择本阶段应包含的课程" class="course-list">
-            <el-option v-for="(obj,index) in list" :key="index" :label="区域一" value="shanghai" />
-          </el-select>
-          <el-button type="primary" plain @click="addStepsCourse">添加</el-button>
-        </div> -->
         <el-transfer
-          v-model="value"
+          v-model="steps.value"
           filterable
           :filter-method="filterMethod"
           filter-placeholder="请输入课程名"
-          :data="data" />
+          :data="steps.data" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">创建</el-button>
@@ -28,27 +22,32 @@
 </template>
 
 <script>
-// import { fetchList } from '@/api/course-stage'
+// import { fetchList } from '@/api/grading'
 export default {
   data() {
+    var steps = {}
+    var fetchList = InitializationData()
+    // const list = []
     const generateData = _ => {
-      // generateData是备选列表；
-      const data = []
+      // 生成备选列表；
+      const list = []
       const courses = ['课程1', '2', '3', '4', '5', '6', '7']
       const spell = ['课程1', '2', '3', '4', '5', '6', '7']
       courses.forEach((course, index) => {
-        data.push({
+        list.push({
           label: course,
           key: index,
           spell: spell[index]
         })
       })
-      return data
+      return list
     }
     return {
-      stepsName: '',
-      data: generateData(),
-      value: [],
+      steps: {
+        name: '',
+        data: generateData(),
+        value: []
+      },
       filterMethod(query, item) {
         return item.spell.indexOf(query) > -1
       }
@@ -57,8 +56,7 @@ export default {
   methods: {
     onSubmit() {
       // 提交数据到后台并重置页面；
-      // console.log(this.filterMethod())
-      this.$router.push('/grading/index')
+      this.$router.push({ path: '/grading' })
       // 上一行应为重置页面
       this.$message('submit!')
       // 编程式导航:
@@ -69,13 +67,27 @@ export default {
         message: 'cancel!',
         type: 'warning'
       })
+    },
+    InitializationData() {
+      // 获取来的列表信息；
+      Vue.axios.get(api).then((response) => {
+        console.log(response.data)
+      })
+    },
+    created(){
+      this.$axios({
+        method:'post',
+        url:'api',
+        data:this.qs.stringify({    //这里是发送给后台的数据
+        userId:this.userId,
+        token:this.token,
+        })
+      }).then((response) =>{          
+        console.log(response)       //请求成功返回的数据
+      }).catch((error) =>{
+        console.log(error)       //请求失败返回的数据
+      })
     }
-    // fetchData() {
-    //   // 获取来的列表信息；
-    //   fetchList().then(response => {
-    //     this.list = response.data.items
-    //   })
-    // }
   }
 }
 </script>
