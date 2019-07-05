@@ -9,7 +9,7 @@
       <input v-model="addDetail.school" type="text" placeholder="学校">
       <input v-model="addDetail.major" type="text" placeholder="专业">
       <input v-model="addDetail.signature" type="text" placeholder="个性签名">
-      <el-button type="primary" plain @click="adddetail">新增</el-button>
+      <el-button type="primary" plain @click="adddetail">添加</el-button>
     </div>
     <!-- 表单 -->
     <el-table :data="newsList" class="table" style="width: 100%">
@@ -18,11 +18,11 @@
           <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="姓名" align="center" width="150" />
-      <el-table-column prop="sex" label="性别" align="center" width="150" />
-      <el-table-column prop="city" label="城市" align="center" width="150" />
-      <el-table-column prop="school" label="学校" align="center" width="150" />
-      <el-table-column prop="major" label="专业" align="center" width="150" />
+      <el-table-column prop="name" label="姓名" align="center" width="100" />
+      <el-table-column prop="sex" label="性别" align="center" width="100" />
+      <el-table-column prop="city" label="城市" align="center" width="200" />
+      <el-table-column prop="school" label="学校" align="center" width="100" />
+      <el-table-column prop="major" label="专业" align="center" width="100" />
       <el-table-column prop="signature" label="个性签名" align="center" width="300" />
       <el-table-column label="编辑" align="center" width="200">
         <template slot-scope="scope">
@@ -84,7 +84,7 @@ export default {
       })
   },
   methods: {
-    // 新增
+    // 添加
     adddetail() {
       this.newsList.push({
         name: this.addDetail.name,
@@ -95,6 +95,12 @@ export default {
         signature: this.addDetail.signature,
         id: Math.floor(Math.random() * 1000000 + 1)
       })
+      this.addDetail.name =  ''
+      this.addDetail.sex = ''
+      this.addDetail.city = ''
+      this.addDetail.school = ''
+      this.addDetail.major = ''
+      this.addDetail.signature = ''
     },
     // 删除
     handleDelete(index, row) {
@@ -117,7 +123,7 @@ export default {
     },
     // 确认更新
     update() {
-      let _this = this
+      const _this = this
       for (let i = 0; i < _this.newsList.length; i++) {
         if (_this.newsList[i].id === this.editid) {
           _this.newsList[i] = {
