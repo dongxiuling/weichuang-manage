@@ -78,10 +78,31 @@ export const constantRoutes = [
   },
 
   {
+<<<<<<< HEAD
     path: '/course',
     component: Layout,
     redirect: '/course/add',
     name: 'Course',
+=======
+    path: '/grading',
+    component: Layout,
+    redirect: '/grading/index',
+    children: [
+      {
+        path: 'grading/index',
+        name: 'Grading',
+        component: () => import('@/views/grading/index'),
+        meta: { title: 'Grading(分阶段)', icon: 'grading' }
+      }
+    ]
+  },
+
+  {
+    path: '/nested',
+    component: Layout,
+    redirect: '/nested/menu1',
+    name: 'Nested',
+>>>>>>> hxq
     meta: {
       title: '课程管理',
       icon: 'nested'
