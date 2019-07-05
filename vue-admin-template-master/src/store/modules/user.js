@@ -5,7 +5,84 @@ import { resetRouter } from '@/router'
 const state = {
   token: getToken(),
   name: '',
-  avatar: ''
+  avatar: '',
+  search: '',
+  tableData: [{
+    date: '2016-05-02',
+    closingData: '2016-07-02',
+    name: '收费1',
+    admissions: true,
+    full: false,
+    id: 1
+  }, {
+    date: '2016-05-04',
+    closingData: '2016-06-04',
+    name: '收费2',
+    admissions: true,
+    full: true,
+    id: 2
+  }, {
+    date: '2016-05-01',
+    closingData: '2016-07-01',
+    name: '收费3',
+    admissions: false,
+    full: false,
+    id: 3
+  }, {
+    date: '2016-05-03',
+    closingData: '2016-06-03',
+    name: '收费4',
+    admissions: true,
+    full: false,
+    id: 4
+  }],
+  tableData2: [{
+    date: '2016-05-02',
+    closingData: '2016-07-02',
+    name: '免费1',
+    admissions: true,
+    full: true,
+    id: 1
+  }, {
+    date: '2016-05-04',
+    closingData: '2016-06-04',
+    name: '免费2',
+    admissions: false,
+    full: true,
+    id: 2
+  }, {
+    date: '2016-05-01',
+    closingData: '2016-07-01',
+    name: '免费3',
+    admissions: false,
+    full: false,
+    id: 3
+  }, {
+    date: '2016-05-03',
+    closingData: '2016-06-03',
+    name: '免费4',
+    admissions: true,
+    full: false,
+    id: 4
+  }],
+  options1: [{
+    value: true,
+    label: '正在招生'
+  }, {
+    value: false,
+    label: '停止招生'
+  }],
+  options2: [{
+    value: true,
+    label: '学生未满'
+  }, {
+    value: false,
+    label: '学生已满'
+  }],
+  delData: [],
+  allData: [],
+  value1: [],
+  value2: []
 }
 
 const mutations = {
@@ -17,6 +94,31 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+    state.name = name
+  },
+  handleEdit(state, row) {
+    console.log(row)
+  },
+  handleDelete1(state, row) {
+    state.delData = state.tableData.filter(function(obj) {
+      return obj.id !== row.id
+    })
+    state.tableData = [...state.delData]
+  },
+  handleDelete2(state, row) {
+    state.delData = state.tableData2.filter(function(obj) {
+      return obj.id !== row.id
+    })
+    state.tableData2 = [...state.delData]
+  },
+  searchHandel(state, value) {
+    state.search = value
+  },
+  getAdmissions(state, value) {
+    state.value1 = value
+  },
+  getFull(state, value) {
+    state.value2 = value
   }
 }
 
