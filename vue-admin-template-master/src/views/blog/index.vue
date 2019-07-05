@@ -12,53 +12,38 @@
       <el-button type="primary" plain @click="adddetail">新增</el-button>
     </tr>
     <!-- 表单 -->
-    <table cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th>序号</th>
-          <th>发表日期</th>
-          <th>分类</th>
-          <th>作者</th>
-          <th>标题</th>
-          <th>内容</th>
-          <th>阅读</th>
-          <th>评论</th>
-          <th>点赞</th>
-          <th>编辑</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item,index) in newsList" :key="index">
-          <td width="5%">{{ index+1 }}</td>
-          <td width="10%">{{ item.date }}</td>
-          <td width="10%">{{ item.classify }}</td>
-          <td width="10%">{{ item.author }}</td>
-          <td width="10%">{{ item.title }}</td>
-          <td width="10%">{{ item.content }}</td>
-          <td width="10%">{{ item.reading }}</td>
-          <td width="10%">{{ item.comments }}</td>
-          <td width="10%">{{ item.praise }}</td>
-          <td width="15%">
-            <el-button type="success" plain @click="dialogFormVisible = true,edit(item)">修改</el-button>
-            <!-- <el-button type="success" plain @click="goList">修改</el-button> -->
-            <el-button type="danger" plain @click="deletelist(item.id,index)">删除</el-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <el-table :data="newsList" class="table" style="width: 100%">
+      <el-table-column prop="index" label="序号" align="center" width="100">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="date" label="发表日期" align="center" width="150" />
+      <el-table-column prop="classify" label="分类" align="center" width="100" />
+      <el-table-column prop="author" label="作者" align="center" width="100" />
+      <el-table-column prop="title" label="标题" align="center" width="100" />
+      <el-table-column prop="content" label="内容" align="center" width="200" />
+      <el-table-column prop="reading" sortable label="阅读" align="center" width="100" />
+      <el-table-column prop="comments" sortable label="评论" align="center" width="100" />
+      <el-table-column prop="praise" sortable label="点赞" align="center" width="200" />
+      <el-table-column label="编辑" align="center" width="200">
+        <template slot-scope="scope">
+          <el-button type="success" plain @click="dialogFormVisible = true,handleEdit(scope.$index, scope.row)">修改</el-button>
+          <el-button type="danger" plain @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
     <!-- 修改 -->
     <el-dialog v-if="dialogFormVisible" title="文章信息" :visible.sync="dialogFormVisible">
-      <el-form :model="editDetail" ref="form" label-width="50px">
+      <el-form ref="form" :model="editDetail" label-width="50px">
         <el-form-item label="分类:">
-          <!-- <el-input v-model="form.name"></el-input> -->
           <el-input v-model="editDetail.classify" type="text" placeholder="分类" />
         </el-form-item>
         <el-form-item label="作者:">
           <el-input v-model="editDetail.author" type="text" placeholder="作者" />
         </el-form-item>
         <el-form-item label="标题:">
-        <el-input v-model="editDetail.title" type="text" placeholder="标题" />
-        <!-- <el-input v-model="editDetail.content" type="text" placeholder="内容" /> -->
+          <el-input v-model="editDetail.title" type="text" placeholder="标题" />
         </el-form-item>
         <mavon-editor v-model="editDetail.content" type="text" placeholder="内容" />
         <!-- <el-form-item label="阅读">
@@ -117,11 +102,11 @@ export default {
       })
     },
     // 删除
-    deletelist(id, i) {
-      this.newsList.splice(i, 1)
+    handleDelete(index, row) {
+      this.newsList.splice(index, 1)
     },
     // 编辑
-    edit(item) {
+    handleEdit(index, item) {
       console.log(item)
       this.editDetail = {
         date: Date(),
@@ -162,23 +147,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-table {
-  width: 100%;
-  padding: 10px;
-}
-table thead th {
-  font-size: 14px;
-  color: #909399;
-  border-bottom: 1px solid #ebeef5;
-  text-align: center;
-  padding: 10px;
-}
-table tbody td {
-  font-size: 14px;
-  color: #606266;
-  border-bottom: 1px solid #ebeef5;
-  text-align: center;
-  padding: 10px;
+.table {
+  margin: 10px;
 }
 .add input {
   border: 1px solid #dcdfe6;
@@ -190,8 +160,5 @@ table tbody td {
 }
 .add button {
   margin-left: 10px;
-}
-.markdown-body {
-  margin-bottom: 20px;
 }
 </style>

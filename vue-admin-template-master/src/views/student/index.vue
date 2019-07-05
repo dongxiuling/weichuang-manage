@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- 添加 -->
-    <tr class="add">
+    <div class="add">
+      <!-- <el-input placeholder="请输入内容" v-model="input" :disabled="true" size="mini"> </el-input> -->
       <input v-model="addDetail.name" type="text" placeholder="姓名">
       <input v-model="addDetail.sex" type="text" placeholder="性别">
       <input v-model="addDetail.city" type="text" placeholder="城市">
@@ -9,40 +10,30 @@
       <input v-model="addDetail.major" type="text" placeholder="专业">
       <input v-model="addDetail.signature" type="text" placeholder="个性签名">
       <el-button type="primary" plain @click="adddetail">新增</el-button>
-    </tr>
+    </div>
     <!-- 表单 -->
-    <table cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th>序号</th>
-          <th>姓名</th>
-          <th>性别</th>
-          <th>城市</th>
-          <th>学校</th>
-          <th>专业</th>
-          <th>个性签名</th>
-          <th>编辑</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item,index) in newsList" :key="index">
-          <td width="5%">{{ index+1 }}</td>
-          <td width="10%">{{ item.name }}</td>
-          <td width="10%">{{ item.sex }}</td>
-          <td width="10%">{{ item.city }}</td>
-          <td width="10%">{{ item.school }}</td>
-          <td width="10%">{{ item.major }}</td>
-          <td width="10%">{{ item.signature }}</td>
-          <td width="15%">
-            <el-button type="success" plain @click="dialogFormVisible = true,edit(item)">修改</el-button>
-            <el-button type="danger" plain @click="deletelist(item.id,index)">删除</el-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <el-table :data="newsList" class="table" style="width: 100%">
+      <el-table-column prop="index" label="序号" align="center" width="100">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="姓名" align="center" width="150" />
+      <el-table-column prop="sex" label="性别" align="center" width="150" />
+      <el-table-column prop="city" label="城市" align="center" width="150" />
+      <el-table-column prop="school" label="学校" align="center" width="150" />
+      <el-table-column prop="major" label="专业" align="center" width="150" />
+      <el-table-column prop="signature" label="个性签名" align="center" width="300" />
+      <el-table-column label="编辑" align="center" width="200">
+        <template slot-scope="scope">
+          <el-button type="success" plain @click="dialogFormVisible = true,handleEdit(scope.$index, scope.row)">修改</el-button>
+          <el-button type="danger" plain @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
     <!-- 修改 -->
     <el-dialog v-if="dialogFormVisible" title="学生信息" :visible.sync="dialogFormVisible">
-      <el-form :model="editDetail" ref="form" label-width="100px">
+      <el-form ref="form" :model="editDetail" label-width="100px">
         <el-form-item label="姓名:">
           <el-input v-model="editDetail.name" type="text" placeholder="姓名" />
         </el-form-item>
@@ -106,11 +97,11 @@ export default {
       })
     },
     // 删除
-    deletelist(id, i) {
-      this.newsList.splice(i, 1)
+    handleDelete(index, row) {
+      this.newsList.splice(index, 1)
     },
     // 编辑
-    edit(item) {
+    handleEdit(index, item) {
       console.log(item)
       this.editDetail = {
         name: item.name,
@@ -121,7 +112,7 @@ export default {
         signature: item.signature,
         id: item.id
       }
-      this.dialogFormVisible = true
+      this.editlist = true
       this.editid = item.id
     },
     // 确认更新
@@ -147,27 +138,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-table {
-  width: 100%;
-  padding: 10px;
-}
-table thead th {
-  font-size: 14px;
-  color: #909399;
-  border-bottom: 1px solid #ebeef5;
-  text-align: center;
-  padding: 10px;
-}
-table tbody td {
-  font-size: 14px;
-  color: #606266;
-  border-bottom: 1px solid #ebeef5;
-  text-align: center;
-  padding: 10px;
+.table {
+  margin: 10px;
 }
 .add input {
   border: 1px solid #dcdfe6;
   border-radius: 4px;
+  width: 150px;
   height: 40px;
   line-height: 40px;
   padding: 10px;
