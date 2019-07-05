@@ -34,7 +34,7 @@
         this.$message({
           message: '使用说明具体内容',
           center: true
-        });
+        })
       }
     }
   }
