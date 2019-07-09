@@ -87,7 +87,7 @@
                 </el-form-item>
               </el-form>
               <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button @click="handleCancel">取 消</el-button>
                 <el-button type="primary" @click="saveBrain(brainObj,index)">保 存</el-button>
               </div>
             </el-dialog>
@@ -189,6 +189,17 @@ export default {
     deleteBrain(stageIdx, idx) {
       this.classStageArr[stageIdx].brain.brainPosition.splice(idx, 1)
     },
+    handleCancel() {
+      this.dialogFormVisible = false
+      this.brainCoor = ''
+      this.brainConcept = ''
+      this.brainExample = ''
+      this.webResource = {
+        name: '',
+        address: ''
+      }
+      this.brainObj = {}
+    },
     handleClose(done) {
       this.$confirm('确认关闭？', {
         confirmButtonText: '确定',
@@ -197,7 +208,7 @@ export default {
         .then(() => {
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: '关闭成功!'
           })
           this.brainCoor = ''
           this.brainConcept = ''
@@ -206,6 +217,7 @@ export default {
             name: '',
             address: ''
           }
+          this.brainObj = {}
           this.dialogFormVisible = false
         })
     }
