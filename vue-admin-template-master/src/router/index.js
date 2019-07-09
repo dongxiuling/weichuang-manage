@@ -78,12 +78,6 @@ export const constantRoutes = [
   },
 
   {
-<<<<<<< HEAD
-    path: '/course',
-    component: Layout,
-    redirect: '/course/add',
-    name: 'Course',
-=======
     path: '/grading',
     component: Layout,
     redirect: '/grading/index',
@@ -102,7 +96,6 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/nested/menu1',
     name: 'Nested',
->>>>>>> hxq
     meta: {
       title: '课程管理',
       icon: 'nested'

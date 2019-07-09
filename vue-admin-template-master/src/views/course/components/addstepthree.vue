@@ -68,7 +68,7 @@
             <el-row style="margin-left:12.5%;"><el-button type="text" @click="dialogFormVisible=true;eventTarget='add'">添加脑图坐标</el-button>
             </el-row>
             <!--下面是弹出的脑图-->
-            <el-dialog title="脑图坐标" :visible.sync="dialogFormVisible">
+            <el-dialog title="脑图坐标" :visible.sync="dialogFormVisible" :before-close="handleClose">
               <el-form :model="pushEmptyObj.brain">
                 <el-form-item label="坐标" :label-width="formLabelWidth">
                   <el-input v-model="brainCoor" autocomplete="off" />
@@ -188,8 +188,29 @@ export default {
     },
     deleteBrain(stageIdx, idx) {
       this.classStageArr[stageIdx].brain.brainPosition.splice(idx, 1)
+    },
+    handleClose(done) {
+      this.$confirm('确认关闭？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+          this.brainCoor = ''
+          this.brainConcept = ''
+          this.brainExample = ''
+          this.webResource = {
+            name: '',
+            address: ''
+          }
+          this.dialogFormVisible = false
+        })
     }
   }
+
 }
 </script>
 
