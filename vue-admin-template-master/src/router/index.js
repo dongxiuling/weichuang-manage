@@ -78,6 +78,15 @@ export const constantRoutes = [
   },
 
   {
+<<<<<<< HEAD
+=======
+    path: '/course',
+    component: Layout,
+    redirect: '/course/add',
+    name: 'Course',
+  },
+  {
+>>>>>>> wangruinan
     path: '/grading',
     component: Layout,
     redirect: '/grading/index',
@@ -86,11 +95,10 @@ export const constantRoutes = [
         path: 'grading/index',
         name: 'Grading',
         component: () => import('@/views/grading/index'),
-        meta: { title: 'Grading(分阶段)', icon: 'grading' }
+        meta: { title: '课程分类', icon: 'grading' }
       }
     ]
   },
-
   {
     path: '/nested',
     component: Layout,
