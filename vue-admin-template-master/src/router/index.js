@@ -76,26 +76,6 @@ export const constantRoutes = [
       }
     ]
   },
-
-  {
-    path: '/course',
-    component: Layout,
-    redirect: '/course/add',
-    name: 'Course',
-  },
-  {
-    path: '/grading',
-    component: Layout,
-    redirect: '/grading/index',
-    children: [
-      {
-        path: 'grading/index',
-        name: 'Grading',
-        component: () => import('@/views/grading/index'),
-        meta: { title: '课程分类', icon: 'grading' }
-      }
-    ]
-  },
   {
     path: '/nested',
     component: Layout,
@@ -116,6 +96,10 @@ export const constantRoutes = [
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
         meta: { title: '查看课程' }
+      },{
+        path: 'grading',
+        component: () => import('@/views/grading/index'),
+        meta: { title: '添加课程阶段' }
       }
     ]
   },
