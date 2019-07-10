@@ -78,15 +78,12 @@ export const constantRoutes = [
   },
 
   {
-<<<<<<< HEAD
-=======
     path: '/course',
     component: Layout,
     redirect: '/course/add',
     name: 'Course',
   },
   {
->>>>>>> wangruinan
     path: '/grading',
     component: Layout,
     redirect: '/grading/index',

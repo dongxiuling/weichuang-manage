@@ -49,7 +49,7 @@
 <style scoped>
     .item-top{
       position: absolute;
-      left: 490px;
+      left: 415px;
       top:80px;
     }
     .el-transfer{
@@ -63,7 +63,7 @@
     }
     .item-bottom{
       position: absolute;
-      left: 540px;
+      left: 450px;
       bottom:55px
     }
     
