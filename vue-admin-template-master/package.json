@@ -21,7 +21,7 @@
     "mavon-editor": "^2.7.5",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
-    "path-to-regexp": "2.4.0",
+    "path-to-regexp": "3.3.0",
     "tui-editor": "^1.4.4-alpha.0",
     "qs.js": "^0.1.12",
     "vue": "2.6.10",
